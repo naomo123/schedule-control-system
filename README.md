@@ -16,6 +16,9 @@ También contará con un login (autorización de usuarios), captura de fotograf�
 
 ## Licencia 📄
 
+Este proyecto está bajo la licencia Reconocimiento-SinObraDerivada(CC BY-ND). Que establece:
+
+Usted es libre de: Usted es libre de copiar, distribuir, exhibir y representar copias literales de la obra y no tiene el derecho de producir obras derivadas. 
 
 
 ## Enlaces de interés 👀
