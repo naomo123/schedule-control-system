@@ -6,6 +6,7 @@ También contará con un login (autorización de usuarios), captura de fotograf�
 
 ## Herramientas 🛠️
 
+## Guia de Instalación 💻
 
 ## Autores ✒️
 * **Rafael Arturo Zamora Aguilar**
