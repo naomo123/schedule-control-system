@@ -10,7 +10,7 @@ abstract class Dao{
         $this->db_host = "localhost";
         $this->db_user = "root";
         $this->db_pass = "";
-        $this->db_name = "inventario_libros";
+        $this->db_name = "schedule_control_system";
     }
 
     private function db_open(){

@@ -1,4 +1,55 @@
+.login-body {
+    background: linear-gradient(90deg, #053D63 0%, #3376A6 76.15%, #76ABD2 100%) !important;
+    font-family: 'Roboto' !important;
+    font-style: normal !important;
+}
+
 .swal2-popup {
     font-size: 1.6rem !important;
     font-family: Georgia, serif;
+}
+
+.login-title {
+    color: white;
+    cursor: pointer;
+}
+
+.login-footer {
+    color: lightgray;
+    cursor: pointer;
+}
+
+.login-box {
+    background: white;
+    border-radius: 1em;
+    margin-top: 14%;
+    width: 567px;
+    height: 350px;
+    text-align: center;
+}
+
+.login-box h1 {
+    font-size: 2em !important;
+    padding: 1em !important;
+    color: #747474;
+}
+
+.login-box .icon {
+    font-size: 29px;
+    color: #AEADAD;
+}
+
+.form-group {
+    margin: 1em;
+}
+
+.login-box .btn-primary {
+    margin-top: 0.5em;
+    background-color: #0C51A8 !important;
+    height: 3em;
+}
+
+.login-bg-img {
+    height: 662px !important;
+    margin-left: -17em !important;
 }
