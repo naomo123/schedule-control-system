@@ -10,7 +10,7 @@ class Routing
         $this->url = explode("/", $_SERVER['REQUEST_URI']);
         $this->controller = empty($this->url[2]) ? 'Home' : $this->url[2];
         $this->controller.="Controller";
-        $this->method = empty($this->url[3]) ? 'Index' : $this->url[3];
+        $this->method = empty($this->url[3]) ? 'Login' : $this->url[3];
         $this->param = empty($this->url[4]) ? '' : $this->url[4];
     }
 }

@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once 'Core/Config.php';
 include_once 'Core/Routing.php';
 $router = new Routing();
