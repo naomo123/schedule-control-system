@@ -7,19 +7,25 @@ class Usuario extends Dao
         extract($object);
         $query = 'CALL sp_login(?,?,?)';
         $result = $this->get_query($query, 'sss', array($username, $username, $password));
-        array_pop($result);
-        if (count($result) == 1)
-        {
+        if (count($result) == 1) {
             $_SESSION["user"] = $result[0];
             return true;
-        }
-        else 
-        {
+        } else {
             session_unset();
             return false;
         }
     }
-    
+
+    public function existsCode($id = "")
+    {
+        $query = 'SELECT * FROM usuarios WHERE codigoUsuario = ?';
+        $result = $this->get_query($query, 's', array($id));
+        if (count($result) == 1)
+            return $result[0];
+        else
+            return null;
+    }
+
     //TODO: SHOULD change
     public function get($id = '')
     {

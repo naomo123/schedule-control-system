@@ -17,7 +17,7 @@
             <div class="col-md-3 offset-md-9">
                 <div class="row m-4">
                     <div class="col-12">
-                        <span class="login-title">Registrar asistencia</span>
+                        <span id="assistanceBtn" class="login-title">Registrar asistencia</span>
                     </div>
                 </div>
             </div>
@@ -55,6 +55,11 @@
             </div>
         </div>
     </div>
+    <script>
+        $('#assistanceBtn').on('click', function () {
+            window.location = "<?=PATH?>/Home/Assistance";
+        });
+    </script>
 </body>
 
 </html>

@@ -42,6 +42,7 @@ abstract class Dao{
         $stmt->close();
         $result->close();
         $this->db_close();
+        array_pop($rows);
         return $rows;
     }
     abstract function get();
