@@ -28,7 +28,8 @@ CREATE TABLE Usuarios
  (
      idAsistencia int PRIMARY KEY NOT NULL AUTO_INCREMENT,
      idUsuario int NOT NULL,
-     fecha dateTime NOT NULL,
+     fecha dateTime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+     imagen varchar(10000) NOT NULL,
      FOREIGN KEY (idUsuario) REFERENCES Usuarios (idUsuario)
  );
 

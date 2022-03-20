@@ -1,6 +1,4 @@
 <div class="container-fluid py-4">
-    <div class="row" style="height: 1000px;">
-    </div>
     <footer class="footer pt-3  ">
         <div class="container-fluid">
             <div class="row align-items-center justify-content-lg-between">
