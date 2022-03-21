@@ -1,3 +1,13 @@
+<?php
+function isSelected($controller, $action)
+{
+    $cssClass = '';
+    $router = new Routing();
+    if ($controller == str_replace('Controller', '', $router->controller) && $action == $router->method)
+        $cssClass = "active";
+    return $cssClass;
+}
+?>
 <div class="min-height-300 bg-primary position-absolute w-100"></div>
 <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
     <div class="sidenav-header">
@@ -14,7 +24,7 @@
             if ($_SESSION["user"]["idPuesto"] == 1) {
             ?>
                 <li class="nav-item">
-                    <a class="nav-link active" href="<?=PATH?>/Admin/Index">
+                    <a class="nav-link <?=isSelected('Admin','Index')?>" href="<?= PATH ?>/Admin/Index">
                         <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa fa-users text-primary text-sm opacity-10"></i>
                         </div>
@@ -25,11 +35,19 @@
             } else {
             ?>
                 <li class="nav-item">
-                    <a class="nav-link active" href="<?=PATH?>/Client/Index">
+                    <a class="nav-link <?=isSelected('Client','Index')?>" href="<?= PATH ?>/Client/Index">
                         <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa fa-clipboard text-primary text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Actividades</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <?=isSelected('Assistance','Index')?>" href="<?= PATH ?>/Assistance/Index">
+                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa fa-pen-nib text-primary text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Asistencias</span>
                     </a>
                 </li>
             <?php
@@ -37,4 +55,13 @@
             ?>
         </ul>
     </div>
+    <?php
+    if ($_SESSION["user"]["idPuesto"] != 1) {
+    ?>
+        <div class="sidenav-footer mx-3 d-flex align-items-end" style="height: 30%;">
+            <a href="<?= PATH ?>/Home/Assistance" class="btn btn-dark btn-sm w-100 mb-3">Registrar Asistencia</a>
+        </div>
+    <?php
+    }
+    ?>
 </aside>

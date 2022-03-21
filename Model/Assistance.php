@@ -9,10 +9,14 @@ class Assistance extends Dao
         return $this->set_query($query, 'ss', array($id, $image));
     }
 
-    //TODO: SHOULD change
-    public function get()
+    public function get($id = '')
     {
+        $query = "SELECT * FROM asistencias WHERE ?";
+        $result = $this->get_query($query, 's', array($id));
+        return $result;
     }
+
+    //TODO: SHOULD change
     public function update()
     {
     }

@@ -8,7 +8,6 @@ class HomeController extends Controller
     private $modelA;
     function __construct()
     {
-        $this->AuthorizeLogin();
         $this->model = new Usuario();
         $this->modelA = new Assistance();
     }
@@ -37,6 +36,7 @@ class HomeController extends Controller
     }
     public function Login()
     {
+        $this->AuthorizeLogin();
         if (isset($_POST['submit'])) {
             if ($this->model->login($_POST)) {
                 if ($_SESSION["user"]["idPuesto"] == 1)

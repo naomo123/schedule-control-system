@@ -16,8 +16,19 @@
     <div class="container">
         <div class="row">
             <div class="col-12 d-flex justify-content-end m-4">
-                <span id="loginBtn" class="login-title mx-4">Iniciar Sesión</span>
-                <span class="login-title">Registrarse</span>
+                <?php
+                if (!isset($_SESSION["user"])) {
+                ?>
+                    <span id="loginBtn" class="login-title mx-4">Iniciar Sesión</span>
+                    <span class="login-title">Registrarse</span>
+                <?php
+                } else {
+                ?>
+                    <span id="logout" class="login-title mx-4">Cerrar Sesión</span>
+                    <span id="return" class="login-title">Regresar</span>
+                <?php
+                }
+                ?>
             </div>
             <div class="col-12  d-flex justify-content-center">
                 <h1 class="title-general">Bienvenido</h1>
@@ -28,7 +39,7 @@
                         <h2>Ingrese su código de empleado</h2>
                         <div class="form-group d-flex justify-content-center">
                             <div class="col-8">
-                                <input type="text" class="form-control" placeholder="Código de Empleado" name="code" required>
+                                <input type="text" class="form-control" placeholder="Código de Empleado" name="code" value="<?= isset($_SESSION['user']) ? $_SESSION['user']['codigoUsuario'] : '' ?>" <?= isset($_SESSION['user']) ? 'readonly' : '' ?> required>
                             </div>
                         </div>
                         <div class="col-12">
@@ -68,6 +79,12 @@
         $(document).ready(function() {
             $('#loginBtn').on('click', function() {
                 window.location = "<?= PATH ?>/Home/Login";
+            });
+            $('#logout').on('click', function() {
+                window.location = "<?= PATH ?>/Home/Logout";
+            });
+            $('#return').on('click', function() {
+                window.location = "<?= PATH ?>/Client/Index";
             });
         });
     </script>
