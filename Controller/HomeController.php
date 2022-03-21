@@ -39,7 +39,10 @@ class HomeController extends Controller
     {
         if (isset($_POST['submit'])) {
             if ($this->model->login($_POST)) {
-                header("location: " . PATH . "/Admin/Index");
+                if ($_SESSION["user"]["idPuesto"] == 1)
+                    header("location: " . PATH . "/Admin/Index");
+                else
+                    header("location: " . PATH . "/Client/Index");
             } else {
                 $viewBag = array();
                 $viewBag['error_log'] = ['invalid_credentials' => 'Credenciales inválidas'];

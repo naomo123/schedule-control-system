@@ -26,20 +26,20 @@ class Usuario extends Dao
             return null;
     }
 
-    //TODO: SHOULD change
     public function get($id = '')
     {
         $query = '';
         if ($id  == '') {
-            $query = 'SELECT * FROM autores';
+            $query = "CALL sp_getUsers()";
             $result = $this->get_query($query);
         } else {
-            $query = "SELECT * FROM autores WHERE codigo_autor = ?";
+            $query = "CALL sp_getUser(?)";
             $result = $this->get_query($query, 's', array($id));
         }
-        array_pop($result);
         return $result;
     }
+
+    //TODO: SHOULD change
     public function set($object = array())
     {
         extract($object);

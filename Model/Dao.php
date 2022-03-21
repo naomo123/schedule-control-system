@@ -20,6 +20,7 @@ abstract class Dao{
         $this->db_conn->close();
     }
     protected function set_query($query, $types = null, $params = null){
+        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         $this->db_open();
         $stmt = $this->db_conn->prepare($query);
         if ($types != null && $params != null)
@@ -30,7 +31,8 @@ abstract class Dao{
         $this->db_close();
         return $rowsAffected;
     }
-    protected function get_query($query, $types = null, $params = null){        
+    protected function get_query($query, $types = null, $params = null){  
+        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);      
         $this->db_open();
         $stmt = $this->db_conn->prepare($query);
         if ($types != null && $params != null)

@@ -18,9 +18,9 @@ CREATE TABLE Usuarios
     fechaNacimiento datetime NOT NULL,
     email varchar(50) NOT NULL,
     contraseña varchar(25) NOT NULL,
-    teléfono char(8),
-    dui char(8),
-    pagoHoras decimal,
+    teléfono char(10),
+    dui char(10),
+    pagoHoras decimal(10,2),
     FOREIGN KEY (idPuesto) REFERENCES Puestos (idPuesto)
  );
 
@@ -34,7 +34,8 @@ CREATE TABLE Usuarios
  );
 
  CREATE TABLE Horarios(
-     idUsuario int NOT NULL,
+     idHorario int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+     nombre varchar(25) NOT NULL,
      dia varchar(25) NOT NULL,
      horaInicio time NOT NULL,
      horaFinal time NOT NULL
@@ -65,9 +66,33 @@ DELIMITER //
 
 CREATE PROCEDURE sp_login(IN codeU varchar(50), IN emailU varchar(50), IN password varchar(25))
 BEGIN
-	SELECT * 
-    FROM usuarios 
+	SELECT idUsuario, codigoUsuario, p.idPuesto as idPuesto, u.nombre as nombre, apellido, fechaNacimiento, email, teléfono, dui, pagoHoras, p.nombre as puesto, dui
+    FROM usuarios u
+    INNER JOIN puestos p ON u.idPuesto = p.idPuesto
     WHERE (codigoUsuario = codeU OR email = emailU) AND contraseña = AES_ENCRYPT(password,"schedule_control_system");
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE sp_getUsers()
+BEGIN
+		SELECT idUsuario, codigoUsuario, p.idPuesto as idPuesto, u.nombre as nombre, apellido, fechaNacimiento, email, teléfono, dui, pagoHoras, p.nombre as puesto, dui
+        FROM usuarios u 
+		INNER JOIN puestos p ON u.idPuesto = p.idPuesto;
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE sp_getUser(IN id INT)
+BEGIN
+		SELECT idUsuario, codigoUsuario, p.idPuesto as idPuesto, u.nombre as nombre, apellido, fechaNacimiento, email, teléfono, dui, pagoHoras, p.nombre as puesto, dui
+        FROM usuarios u 
+		INNER JOIN puestos p ON u.idPuesto = p.idPuesto
+        WHERE idUsuario = id;
 END //
 
 DELIMITER ;
