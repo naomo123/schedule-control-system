@@ -29,25 +29,37 @@
     text-align: center;
 }
 
-.login-box h1 {
+.signin-box {
+    background: white;
+    border-radius: 1em;
+    margin-top: 12%;
+    width: 567px;
+    height: 410px;
+    text-align: center;
+}
+
+.login-box h1,
+.signin-box h1 {
     font-size: 2em !important;
     padding: 1em !important;
     color: #747474;
 }
 
-.login-box .icon {
+.login-box .icon,
+.signin-box .icon {
     font-size: 29px;
     color: #AEADAD;
 }
 
-.form-group {
-    margin: 1em;
-}
-
-.login-box .btn-primary {
+.login-box .btn-primary,
+.signin-box .btn-primary {
     margin-top: 0.5em;
     background-color: #0C51A8 !important;
     height: 3em;
+}
+
+.form-group {
+    margin: 1em;
 }
 
 .login-bg-img {

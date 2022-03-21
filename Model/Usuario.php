@@ -39,6 +39,14 @@ class Usuario extends Dao
         return $result;
     }
 
+    public function signin($object = array())
+    {
+        extract($object);
+        $query = 'CALL sp_signIn(?,?)';
+        return $this->set_query($query, 'ss', array($code, $password));
+    }
+
+
     //TODO: SHOULD change
     public function set($object = array())
     {

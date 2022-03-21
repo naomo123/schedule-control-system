@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actividades</title>
+    <title>Horario</title>
     <?php
     include_once 'View/Shared/_Header.php';
     ?>
@@ -31,37 +31,23 @@
                 <div class="col-12 px-5">
                     <div class="card mb-4">
                         <div class="card-header pb-0 d-flex justify-content-between align-items-center">
-                            <h6>Lista de Actividades</h6>
+                            <h6>Horario del día</h6>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
                                 <table class="table align-items-center mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-secondary text-xxs font-weight-bolder opacity-7">ID Actividad</th>
-                                            <th class="text-center text-secondary text-xxs font-weight-bolder opacity-7">Descripción</th>
-                                            <th class="text-center text-secondary text-xxs font-weight-bolder opacity-7">Hora Inicio</th>
-                                            <th class="text-center text-secondary text-xxs font-weight-bolder opacity-7">Hora Fin</th>
-                                        </tr>
-                                    </thead>
                                     <tbody>
                                         <?php
                                         foreach ($horarios as $horario) {
                                             $horaInicio = new DateTime($horario["horaInicio"]);
-                                            $horaFinal = new DateTime($horario["horaFinal"]);
                                         ?>
                                             <tr>
-                                                <td>
-                                                    <p class="text-secondary text-xs font-weight-bold px-3 pt-3"><?= sprintf('A%05d', $horario["idHorario"]) ?></p>
+                                                <td style="border: none;" class="py-4 align-middle text-center d-flex align-items-center justify-content-center">
+                                                    <i class="fa fa-clock" style="font-size: 3em;"></i>
+                                                    <span style="font-size: 2em !important;" class="text-secondary text-xs font-weight-bold">&nbsp;&nbsp;<?= $horaInicio->format('h:i:s A') ?></span>
                                                 </td>
-                                                <td class="align-middle text-center text-sm">
-                                                    <span class="text-secondary text-xs font-weight-bold"><?= utf8_encode($horario["nombre"]) ?></span>
-                                                </td>
-                                                <td class="align-middle text-center">
-                                                    <span class="text-secondary text-xs font-weight-bold"><?= $horaInicio->format('h:i:s A') ?></span>
-                                                </td>
-                                                <td class="align-middle text-center">
-                                                    <span class="text-secondary text-xs font-weight-bold"><?= $horaFinal->format('h:i:s A') ?></span>
+                                                <td style="border: none;" class="align-middle text-center text-sm">
+                                                    <span style="font-size: 2em !important;"  class="text-secondary text-xs font-weight-bold"><?= utf8_encode($horario["nombre"]) ?></span>
                                                 </td>
                                             </tr>
                                         <?php

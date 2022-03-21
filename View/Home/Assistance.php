@@ -20,7 +20,7 @@
                 if (!isset($_SESSION["user"])) {
                 ?>
                     <span id="loginBtn" class="login-title mx-4">Iniciar Sesión</span>
-                    <span class="login-title">Registrarse</span>
+                    <span id="signinBtn" class="login-title">Registrarse</span>
                 <?php
                 } else {
                 ?>
@@ -79,6 +79,9 @@
         $(document).ready(function() {
             $('#loginBtn').on('click', function() {
                 window.location = "<?= PATH ?>/Home/Login";
+            });
+            $('#signinBtn').on('click', function() {
+                window.location = "<?= PATH ?>/Home/Signin";
             });
             $('#logout').on('click', function() {
                 window.location = "<?= PATH ?>/Home/Logout";
