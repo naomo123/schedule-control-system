@@ -16,4 +16,10 @@ class ClientController extends Controller
         $viewBag['horarios'] = $this->modelH->get();
         $this->render("Index", $viewBag);
     }
+    public function Schedule()
+    {
+        $viewBag = array();
+        $viewBag['horarios'] = $this->modelH->get_actual();
+        $this->render("Schedule", $viewBag);
+    }
 }

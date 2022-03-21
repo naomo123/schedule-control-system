@@ -11,7 +11,7 @@ class Assistance extends Dao
 
     public function get($id = '')
     {
-        $query = "SELECT * FROM asistencias WHERE ?";
+        $query = "SELECT * FROM asistencias WHERE idAsistencia = ?";
         $result = $this->get_query($query, 's', array($id));
         return $result;
     }

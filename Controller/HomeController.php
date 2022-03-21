@@ -46,10 +46,34 @@ class HomeController extends Controller
             } else {
                 $viewBag = array();
                 $viewBag['error_log'] = ['invalid_credentials' => 'Credenciales inválidas'];
+                $viewBag['temp_data'] = ['username' => $_POST['username']];
                 $this->render("Login", $viewBag);
             }
         } else
             $this->render("Login");
+    }
+    public function Signin()
+    {
+        $this->AuthorizeLogin();
+        if (isset($_POST['submit'])) {
+            if ($this->model->existsCode($_POST['code'])) {
+                if ($_POST["password"] != $_POST["passwordRepeat"]) {
+                    $viewBag = array();
+                    $viewBag['error_log'] = ['error' => 'Las contraseñas no coinciden'];
+                    $viewBag['temp_data'] = ['code' => $_POST['code']];
+                    $this->render("Signin", $viewBag);
+                } else {
+                    $viewBag = array();
+                    $viewBag['temp_data'] = ['result' => $this->model->signin($_POST)];
+                    $this->render("Login", $viewBag);
+                }
+            } else {
+                $viewBag = array();
+                $viewBag['error_log'] = ['error' => 'Código de empleado erróneo'];
+                $this->render("Signin", $viewBag);
+            }
+        } else
+            $this->render("Signin");
     }
     public function Logout()
     {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 21, 2022 at 07:55 PM
+-- Generation Time: Mar 21, 2022 at 08:37 PM
 -- Server version: 5.7.36
 -- PHP Version: 7.4.26
 
@@ -25,6 +25,14 @@ DELIMITER $$
 --
 -- Procedures
 --
+DROP PROCEDURE IF EXISTS `sp_getPayments`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getPayments` (IN `id` INT)  BEGIN
+    SELECT idPagos, idUsuario, tp.idTipoPago as `idTipoPago`, tp.nombre as `tipopago`, fechaPago, monto, isss, renta, montoFinal
+    FROM pagos p
+    INNER JOIN tipopagos tp ON tp.idTipoPago = p.idTipoPago
+    WHERE idUsuario = id;
+END$$
+
 DROP PROCEDURE IF EXISTS `sp_getUser`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getUser` (IN `id` INT)  BEGIN
 		SELECT idUsuario, codigoUsuario, p.idPuesto as idPuesto, u.nombre as nombre, apellido, fechaNacimiento, email, teléfono, dui, pagoHoras, p.nombre as puesto, dui
@@ -48,6 +56,16 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_login` (IN `codeU` VARCHAR(50), 
     WHERE (codigoUsuario = codeU OR email = emailU) AND contraseña = AES_ENCRYPT(password,"schedule_control_system");
 END$$
 
+DROP PROCEDURE IF EXISTS `sp_getSchedule`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getSchedule` (IN `day` VARCHAR(1))  BEGIN
+	SELECT * FROM horarios WHERE dia LIKE concat('%',day,'%');
+END$$
+
+DROP PROCEDURE IF EXISTS `sp_signIn`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_signIn` (IN `code` varchar(50), IN `password` VARCHAR(25))  BEGIN
+	UPDATE usuarios SET contraseña = AES_ENCRYPT(password,"schedule_control_system") WHERE codigoUsuario = code AND contraseña = '';
+END$$
+
 DELIMITER ;
 
 -- --------------------------------------------------------
@@ -64,7 +82,14 @@ CREATE TABLE IF NOT EXISTS `asistencias` (
   `imagen` varchar(10000) NOT NULL,
   PRIMARY KEY (`idAsistencia`),
   KEY `idUsuario` (`idUsuario`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `asistencias`
+--
+
+INSERT INTO `asistencias` (`idAsistencia`, `idUsuario`, `fecha`, `imagen`) VALUES
+(2, 2, '2022-03-21 14:35:14', 'E00001 6238e182c6454.png');
 
 -- --------------------------------------------------------
 
@@ -89,8 +114,9 @@ CREATE TABLE IF NOT EXISTS `horarios` (
 INSERT INTO `horarios` (`idHorario`, `nombre`, `dia`, `horaInicio`, `horaFinal`) VALUES
 (1, 'Inicio Labores', '1,2,3,4,5,6', '07:00:00', '16:00:00'),
 (2, 'Descanso (20 min)', '1,2,3,4,5,6', '10:00:00', '10:20:00'),
-(3, 'Almuerzo', '1,2,3,4,5,6', '12:00:00', '13:00:00'),
-(4, 'Finalización de labores', '1,2,3,4,5,6', '15:30:00', '16:00:00');
+(3, 'Almuerzo', '1,2,3', '12:00:00', '13:00:00'),
+(4, 'Finalización de labores', '1,2,3', '16:00:00', '16:00:00'),
+(4, 'Finalización de labores', '4,5,6', '12:00:00', '12:00:00');
 
 -- --------------------------------------------------------
 
@@ -103,15 +129,22 @@ CREATE TABLE IF NOT EXISTS `pagos` (
   `idPagos` int(11) NOT NULL AUTO_INCREMENT,
   `idUsuario` int(11) NOT NULL,
   `idTipoPago` int(11) NOT NULL,
-  `fechaPago` date NOT NULL,
-  `monto` decimal(10,0) NOT NULL,
-  `isss` decimal(10,0) NOT NULL,
-  `renta` decimal(10,0) NOT NULL,
-  `montoFinal` decimal(10,0) NOT NULL,
+  `fechaPago` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `monto` decimal(10,2) NOT NULL,
+  `isss` decimal(10,2) NOT NULL,
+  `renta` decimal(10,2) NOT NULL,
+  `montoFinal` decimal(10,2) NOT NULL,
   PRIMARY KEY (`idPagos`),
   KEY `idUsuario` (`idUsuario`),
   KEY `idTipoPago` (`idTipoPago`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pagos`
+--
+
+INSERT INTO `pagos` (`idPagos`, `idUsuario`, `idTipoPago`, `fechaPago`, `monto`, `isss`, `renta`, `montoFinal`) VALUES
+(1, 2, 4, '2022-03-21 14:22:50', '400.00', '20.00', '40.00', '340.00');
 
 -- --------------------------------------------------------
 
