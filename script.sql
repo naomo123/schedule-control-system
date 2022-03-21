@@ -1,98 +1,199 @@
- CREATE DATABASE schedule_control_system;
- USE schedule_control_system;
- 
- CREATE TABLE Puestos
- (
-     idPuesto int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-     nombre varchar(25) NOT NULL,
-     descripcion varchar(200)
- );
+-- phpMyAdmin SQL Dump
+-- version 5.1.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1:3306
+-- Generation Time: Mar 21, 2022 at 07:55 PM
+-- Server version: 5.7.36
+-- PHP Version: 7.4.26
 
-CREATE TABLE Usuarios 
-(
-    idUsuario int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    codigoUsuario char(6),
-    idPuesto char(3) NOT NULL,
-    nombre varchar(50) NOT NULL,
-    apellido varchar(50) NOT NULL,
-    fechaNacimiento datetime NOT NULL,
-    email varchar(50) NOT NULL,
-    contraseña varchar(25) NOT NULL,
-    teléfono char(10),
-    dui char(10),
-    pagoHoras decimal(10,2),
-    FOREIGN KEY (idPuesto) REFERENCES Puestos (idPuesto)
- );
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
- CREATE TABLE Asistencias
- (
-     idAsistencia int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-     idUsuario int NOT NULL,
-     fecha dateTime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-     imagen varchar(10000) NOT NULL,
-     FOREIGN KEY (idUsuario) REFERENCES Usuarios (idUsuario)
- );
 
- CREATE TABLE Horarios(
-     idHorario int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-     nombre varchar(25) NOT NULL,
-     dia varchar(25) NOT NULL,
-     horaInicio time NOT NULL,
-     horaFinal time NOT NULL
- );
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
-  CREATE TABLE tipoPagos
- (
-     idTipoPago int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-     nombre varchar(25)
- );
- 
- CREATE TABLE Pagos
- (
-     idPagos int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-     idUsuario int NOT NULL,
-     idTipoPago int NOT NULL,
-     fechaPago date NOT NULL,
-     monto decimal NOT NULL,
-     isss decimal NOT NULL,
-     renta decimal not null,
-     montoFinal decimal NOT NULL,
+--
+-- Database: `schedule_control_system`
+--
 
-     FOREIGN KEY (idUsuario) REFERENCES Usuarios (idUsuario),
-     FOREIGN KEY (idTipoPago) REFERENCES tipoPagos (idTipoPago)
- );
-
-DELIMITER //
-
-CREATE PROCEDURE sp_login(IN codeU varchar(50), IN emailU varchar(50), IN password varchar(25))
-BEGIN
-	SELECT idUsuario, codigoUsuario, p.idPuesto as idPuesto, u.nombre as nombre, apellido, fechaNacimiento, email, teléfono, dui, pagoHoras, p.nombre as puesto, dui
-    FROM usuarios u
-    INNER JOIN puestos p ON u.idPuesto = p.idPuesto
-    WHERE (codigoUsuario = codeU OR email = emailU) AND contraseña = AES_ENCRYPT(password,"schedule_control_system");
-END //
-
-DELIMITER ;
-
-DELIMITER //
-
-CREATE PROCEDURE sp_getUsers()
-BEGIN
-		SELECT idUsuario, codigoUsuario, p.idPuesto as idPuesto, u.nombre as nombre, apellido, fechaNacimiento, email, teléfono, dui, pagoHoras, p.nombre as puesto, dui
-        FROM usuarios u 
-		INNER JOIN puestos p ON u.idPuesto = p.idPuesto;
-END //
-
-DELIMITER ;
-
-DELIMITER //
-
-CREATE PROCEDURE sp_getUser(IN id INT)
-BEGIN
+DELIMITER $$
+--
+-- Procedures
+--
+DROP PROCEDURE IF EXISTS `sp_getUser`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getUser` (IN `id` INT)  BEGIN
 		SELECT idUsuario, codigoUsuario, p.idPuesto as idPuesto, u.nombre as nombre, apellido, fechaNacimiento, email, teléfono, dui, pagoHoras, p.nombre as puesto, dui
         FROM usuarios u 
 		INNER JOIN puestos p ON u.idPuesto = p.idPuesto
         WHERE idUsuario = id;
-END //
+END$$
+
+DROP PROCEDURE IF EXISTS `sp_getUsers`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getUsers` ()  BEGIN
+		SELECT idUsuario, codigoUsuario, p.idPuesto as idPuesto, u.nombre as nombre, apellido, fechaNacimiento, email, teléfono, dui, pagoHoras, p.nombre as puesto, dui
+        FROM usuarios u 
+		INNER JOIN puestos p ON u.idPuesto = p.idPuesto;
+END$$
+
+DROP PROCEDURE IF EXISTS `sp_login`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_login` (IN `codeU` VARCHAR(50), IN `emailU` VARCHAR(50), IN `password` VARCHAR(25))  BEGIN
+	SELECT idUsuario, codigoUsuario, p.idPuesto as idPuesto, u.nombre as nombre, apellido, fechaNacimiento, email, teléfono, dui, pagoHoras, p.nombre as puesto, dui
+    FROM usuarios u
+    INNER JOIN puestos p ON u.idPuesto = p.idPuesto
+    WHERE (codigoUsuario = codeU OR email = emailU) AND contraseña = AES_ENCRYPT(password,"schedule_control_system");
+END$$
 
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `asistencias`
+--
+
+DROP TABLE IF EXISTS `asistencias`;
+CREATE TABLE IF NOT EXISTS `asistencias` (
+  `idAsistencia` int(11) NOT NULL AUTO_INCREMENT,
+  `idUsuario` int(11) NOT NULL,
+  `fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `imagen` varchar(10000) NOT NULL,
+  PRIMARY KEY (`idAsistencia`),
+  KEY `idUsuario` (`idUsuario`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `horarios`
+--
+
+DROP TABLE IF EXISTS `horarios`;
+CREATE TABLE IF NOT EXISTS `horarios` (
+  `idHorario` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(25) NOT NULL,
+  `dia` varchar(25) NOT NULL,
+  `horaInicio` time NOT NULL,
+  `horaFinal` time NOT NULL,
+  PRIMARY KEY (`idHorario`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `horarios`
+--
+
+INSERT INTO `horarios` (`idHorario`, `nombre`, `dia`, `horaInicio`, `horaFinal`) VALUES
+(1, 'Inicio Labores', '1,2,3,4,5,6', '07:00:00', '16:00:00'),
+(2, 'Descanso (20 min)', '1,2,3,4,5,6', '10:00:00', '10:20:00'),
+(3, 'Almuerzo', '1,2,3,4,5,6', '12:00:00', '13:00:00'),
+(4, 'Finalización de labores', '1,2,3,4,5,6', '15:30:00', '16:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pagos`
+--
+
+DROP TABLE IF EXISTS `pagos`;
+CREATE TABLE IF NOT EXISTS `pagos` (
+  `idPagos` int(11) NOT NULL AUTO_INCREMENT,
+  `idUsuario` int(11) NOT NULL,
+  `idTipoPago` int(11) NOT NULL,
+  `fechaPago` date NOT NULL,
+  `monto` decimal(10,0) NOT NULL,
+  `isss` decimal(10,0) NOT NULL,
+  `renta` decimal(10,0) NOT NULL,
+  `montoFinal` decimal(10,0) NOT NULL,
+  PRIMARY KEY (`idPagos`),
+  KEY `idUsuario` (`idUsuario`),
+  KEY `idTipoPago` (`idTipoPago`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `puestos`
+--
+
+DROP TABLE IF EXISTS `puestos`;
+CREATE TABLE IF NOT EXISTS `puestos` (
+  `idPuesto` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(25) NOT NULL,
+  `descripcion` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`idPuesto`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `puestos`
+--
+
+INSERT INTO `puestos` (`idPuesto`, `nombre`, `descripcion`) VALUES
+(1, 'Administrador', 'Es un administrador del sistema'),
+(2, 'Director de Marketing', NULL),
+(3, 'Analista Big Data', NULL),
+(4, 'Analista Programador', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tipopagos`
+--
+
+DROP TABLE IF EXISTS `tipopagos`;
+CREATE TABLE IF NOT EXISTS `tipopagos` (
+  `idTipoPago` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(25) DEFAULT NULL,
+  PRIMARY KEY (`idTipoPago`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tipopagos`
+--
+
+INSERT INTO `tipopagos` (`idTipoPago`, `nombre`) VALUES
+(4, 'Mensual'),
+(3, 'Quincenal');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `usuarios`
+--
+
+DROP TABLE IF EXISTS `usuarios`;
+CREATE TABLE IF NOT EXISTS `usuarios` (
+  `idUsuario` int(11) NOT NULL AUTO_INCREMENT,
+  `codigoUsuario` char(6) DEFAULT NULL,
+  `idPuesto` char(3) NOT NULL,
+  `nombre` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
+  `apellido` varchar(50) NOT NULL,
+  `fechaNacimiento` datetime NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `contraseña` varchar(25) NOT NULL,
+  `teléfono` char(10) DEFAULT NULL,
+  `dui` char(10) DEFAULT NULL,
+  `pagoHoras` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`idUsuario`),
+  KEY `idPuesto` (`idPuesto`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `usuarios`
+--
+
+INSERT INTO `usuarios` (`idUsuario`, `codigoUsuario`, `idPuesto`, `nombre`, `apellido`, `fechaNacimiento`, `email`, `contraseña`, `teléfono`, `dui`, `pagoHoras`) VALUES
+(1, 'E00000', '1', 'super', 'admin', '2022-03-19 16:01:49', 'sa@gmail.com', 'àÿÝL=?O£$­vDµ', NULL, NULL, NULL),
+(2, 'E00001', '2', 'Juan Carlos', 'Almería', '1992-02-15 10:13:18', 'juan@gmail.com', 'Q
+[þ©<³§¶¿OñÐ/', '7777-8888', '060108266', '5.00'),
+(3, 'E00002', '3', 'Naomi', 'Guardado Iglesias', '1992-03-15 10:13:18', 'naomi@gmail.com', 'ÖåçµÆZ¢5½þwb‘è•
+', '2222-3333', '060108267', '6.78'),
+(4, 'E00003', '4', 'Katherine', 'Mejía', '1992-04-15 10:13:18', 'katherine@gmail.com', '2BëÙQc8;JÞ`Ê\\‹O', '7898-2314', '060108268', '4.50');
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
