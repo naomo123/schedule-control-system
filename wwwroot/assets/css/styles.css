@@ -1,3 +1,9 @@
+.editOpt:hover,
+.deleteOpt:hover,
+.createOpt:hover {
+    color: white;
+}
+
 .login-body {
     background: linear-gradient(90deg, #053D63 0%, #3376A6 76.15%, #76ABD2 100%) !important;
     font-family: 'Roboto' !important;

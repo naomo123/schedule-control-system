@@ -22,13 +22,23 @@ abstract class Controller
             header("location: " . PATH . "/Home/Login");
         }
     }
-    public function AuthorizeLogin(){
+    public function AuthorizeLogin()
+    {
         if (isset($_SESSION["user"])) {
             switch ($_SESSION["user"]["idPuesto"]) {
                 case 1:
                     header("location: " . PATH . "/Admin/Index");
                     break;
+                default:
+                    header("location: " . PATH . "/Client/Index");
+                    break;
             }
+        }
+    }
+    public function AuthorizeRole($roleId)
+    {
+        if ($_SESSION["user"]["idPuesto"] != $roleId) {
+            $this->AuthorizeLogin();
         }
     }
 }
