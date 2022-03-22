@@ -116,7 +116,7 @@ INSERT INTO `horarios` (`idHorario`, `nombre`, `dia`, `horaInicio`, `horaFinal`)
 (2, 'Descanso (20 min)', '1,2,3,4,5,6', '10:00:00', '10:20:00'),
 (3, 'Almuerzo', '1,2,3', '12:00:00', '13:00:00'),
 (4, 'Finalización de labores', '1,2,3', '16:00:00', '16:00:00'),
-(4, 'Finalización de labores', '4,5,6', '12:00:00', '12:00:00');
+(5, 'Finalización de labores', '4,5,6', '12:00:00', '12:00:00');
 
 -- --------------------------------------------------------
 
@@ -220,10 +220,8 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 
 INSERT INTO `usuarios` (`idUsuario`, `codigoUsuario`, `idPuesto`, `nombre`, `apellido`, `fechaNacimiento`, `email`, `contraseña`, `teléfono`, `dui`, `pagoHoras`) VALUES
 (1, 'E00000', '1', 'super', 'admin', '2022-03-19 16:01:49', 'sa@gmail.com', 'àÿÝL=?O£$­vDµ', NULL, NULL, NULL),
-(2, 'E00001', '2', 'Juan Carlos', 'Almería', '1992-02-15 10:13:18', 'juan@gmail.com', 'Q
-[þ©<³§¶¿OñÐ/', '7777-8888', '060108266', '5.00'),
-(3, 'E00002', '3', 'Naomi', 'Guardado Iglesias', '1992-03-15 10:13:18', 'naomi@gmail.com', 'ÖåçµÆZ¢5½þwb‘è•
-', '2222-3333', '060108267', '6.78'),
+(2, 'E00001', '2', 'Juan Carlos', 'Almería', '1992-02-15 10:13:18', 'juan@gmail.com', 'Q[þ©<³§¶¿OñÐ/', '7777-8888', '060108266', '5.00'),
+(3, 'E00002', '3', 'Naomi', 'Guardado Iglesias', '1992-03-15 10:13:18', 'naomi@gmail.com', 'ÖåçµÆZ¢5½þwb‘è•', '2222-3333', '060108267', '6.78'),
 (4, 'E00003', '4', 'Katherine', 'Mejía', '1992-04-15 10:13:18', 'katherine@gmail.com', '2BëÙQc8;JÞ`Ê\\‹O', '7898-2314', '060108268', '4.50');
 COMMIT;
 
