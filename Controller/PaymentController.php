@@ -7,7 +7,7 @@ class PaymentController extends Controller
     function __construct()
     {
         $this->Authorize();
-        $this->AuthorizeRole(2);
+        $this->AuthorizeRole([2, 3, 4]);
         $this->modelP = new Pago();
     }
     public function Index()
