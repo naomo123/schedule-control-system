@@ -145,6 +145,8 @@ CREATE TABLE IF NOT EXISTS `pagos` (
 
 INSERT INTO `pagos` (`idPagos`, `idUsuario`, `idTipoPago`, `fechaPago`, `monto`, `isss`, `renta`, `montoFinal`) VALUES
 (1, 2, 4, '2022-03-21 14:22:50', '400.00', '20.00', '40.00', '340.00');
+(1, 4, 4, '2022-03-21 14:22:50', '400.00', '20.00', '40.00', '340.00');
+
 
 -- --------------------------------------------------------
 
