@@ -7,7 +7,7 @@ class AdminController extends Controller
     function __construct()
     {
         $this->Authorize();
-        $this->AuthorizeRole(1);
+        $this->AuthorizeRole([1]);
         $this->model = new Usuario();
     }
     public function Index()

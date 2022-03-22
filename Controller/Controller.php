@@ -35,10 +35,16 @@ abstract class Controller
             }
         }
     }
-    public function AuthorizeRole($roleId)
+    public function AuthorizeRole($rolesId = array())
     {
-        if ($_SESSION["user"]["idPuesto"] != $roleId) {
-            $this->AuthorizeLogin();
+        $flag = false;
+        foreach ($rolesId as $roleId) {
+            if ($_SESSION["user"]["idPuesto"] == $roleId) {
+                $flag = true;
+                break;
+            }
         }
+        if (!$flag)
+            $this->AuthorizeLogin();
     }
 }
