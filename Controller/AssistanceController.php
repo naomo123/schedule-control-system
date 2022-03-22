@@ -7,7 +7,7 @@ class AssistanceController extends Controller
     function __construct()
     {
         $this->Authorize();
-        $this->AuthorizeRole(2);
+        $this->AuthorizeRole([2, 3, 4]);
         $this->modelA = new Assistance();
     }
     public function Index()
