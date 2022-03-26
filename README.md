@@ -37,5 +37,5 @@ Usted es libre de: Usted es libre de copiar, distribuir, exhibir y representar c
 * [Tablero en Trello] https://trello.com/b/0a9CHD9I/schedule-control-system
 * [Manual de usuario en la nube]  https://drive.google.com/file/d/1DlhSki19aKfVGaA4biQfIbshOoeLS2Bs/view?usp=sharing
 * [Manual Técnico en la nube] 
-* [Video de funcionamiento] 
+* [Video de funcionamiento] https://youtu.be/Q1q4cxIgq4Q
 * [Enlace a Mockups]  https://www.figma.com/proto/WpSTL6zZu9g4lFp7Io7RKA/Schedule-control-system?node-id=127%3A514&scaling=min-zoom&page-id=0%3A1
