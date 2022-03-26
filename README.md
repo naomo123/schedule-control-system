@@ -18,6 +18,10 @@ Antes de comenzar, asegurese de tener instalado:
 * Visual studio code
 * Navegador web
 
+## Manual Técnico
+
+ https://www.yumpu.com/es/document/read/66604694/manual-tecnico
+ 
 ## Autores ✒️
 * **Rafael Arturo Zamora Aguilar**
 * **Naomi Nicole Guardado Iglesias**
@@ -39,3 +43,5 @@ Usted es libre de: Usted es libre de copiar, distribuir, exhibir y representar c
 * [Manual Técnico en la nube] 
 * [Video de funcionamiento] https://youtu.be/Q1q4cxIgq4Q
 * [Enlace a Mockups]  https://www.figma.com/proto/WpSTL6zZu9g4lFp7Io7RKA/Schedule-control-system?node-id=127%3A514&scaling=min-zoom&page-id=0%3A1
+
+
