@@ -24,7 +24,7 @@ function isSelected($controller, $action)
             if ($_SESSION["user"]["idPuesto"] == 1) {
             ?>
                 <li class="nav-item">
-                    <a class="nav-link <?=isSelected('Admin','Index')?>" href="<?= PATH ?>/Admin/Index">
+                    <a class="nav-link <?=isSelected('Admin','Index')?> <?=isSelected('Admin','Create')?> <?=isSelected('Admin','Edit')?>" href="<?= PATH ?>/Admin/Index">
                         <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa fa-users text-primary text-sm opacity-10"></i>
                         </div>

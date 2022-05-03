@@ -26,6 +26,16 @@ class Usuario extends Dao
             return null;
     }
 
+    public function existsEmail($email = "")
+    {
+        $query = 'SELECT * FROM usuarios WHERE email = ?';
+        $result = $this->get_query($query, 's', array($email));
+        if (count($result) == 1)
+            return $result[0];
+        else
+            return null;
+    }
+
     public function get($id = '')
     {
         $query = '';
@@ -46,25 +56,23 @@ class Usuario extends Dao
         return $this->set_query($query, 'ss', array($code, $password));
     }
 
-
-    //TODO: SHOULD change
     public function set($object = array())
     {
         extract($object);
-        $query = "INSERT INTO autores(codigo_autor, nombre_autor, nacionalidad)
-            VALUES(?,?,?)";
-        return $this->set_query($query, 'sss', array($codigo_autor, $nombre_autor, $nacionalidad));
+        $query = "CALL sp_setUser(?,?,?,?,?,?,?,?,?)";
+        return $this->set_query($query, 'sssssssss', array($id, $positionId, $name, $lastName, $birthdate, $email, $telephone, $dui, $extraHours));
     }
+
     public function update($object = array())
     {
         extract($object);
-        $query = "UPDATE autores SET nombre_autor=?, nacionalidad=?
-         WHERE codigo_autor=?";
-        return $this->set_query($query, 'sss', array($nombre_autor, $nacionalidad, $codigo_autor));
+        $query = "CALL sp_updateUser(?,?,?,?,?,?,?,?)";
+        return $this->set_query($query, 'ssssssss', array($id, $positionId, $name, $lastName, $birthdate, $telephone, $dui, $extraHours));
     }
+
     public function delete($id = '')
     {
-        $query = "DELETE FROM autores WHERE codigo_autor=?";
+        $query = "DELETE FROM usuarios WHERE codigoUsuario=?";
         return $this->set_query($query, 's', array($id));
     }
 }
