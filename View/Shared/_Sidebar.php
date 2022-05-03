@@ -31,6 +31,38 @@ function isSelected($controller, $action)
                         <span class="nav-link-text ms-1">Empleados</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link <?=isSelected('Schedule','Index')?> <?=isSelected('Schedule','Create')?> <?=isSelected('Schedule','Edit')?>" href="<?= PATH ?>/Schedule/Index">
+                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa fa-calendar-week text-primary text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Horarios</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <?=isSelected('Position','Index')?> <?=isSelected('Position','Create')?> <?=isSelected('Position','Edit')?>" href="<?= PATH ?>/Position/Index">
+                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa fa-briefcase text-primary text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Puestos</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <?=isSelected('Payment','IndexAdmin')?> <?=isSelected('Payment','Create')?> <?=isSelected('Payment','Edit')?>" href="<?= PATH ?>/Payment/IndexAdmin">
+                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa fa-money-bill text-primary text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Pagos</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <?=isSelected('Assistance','IndexAdmin')?> <?=isSelected('Assistance','Create')?> <?=isSelected('Assistance','Edit')?>" href="<?= PATH ?>/Assistance/IndexAdmin/2">
+                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa fa-camera text-primary text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Asistencias registradas</span>
+                    </a>
+                </li>
             <?php
             } else {
             ?>
